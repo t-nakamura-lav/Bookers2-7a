@@ -27,37 +27,12 @@
           </td>
 
         <td>コメント数:<%= @book.post_comments.count %></p>
-        <% @book.post_comments.each do |post_comment| %>
         </td>
-      </tr>
-
-      <tr>
-        <td>
-          <%= link_to user_path(@book.user) do %>
-            <%= attachment_image_tag(post_comment.user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %>
-            <%= post_comment.user.name %>
-        </td>
-        <td>
-            <%= post_comment.comment %>
-          <% end %>
-        </td>
-        <td>
-          <% if post_comment.user == current_user %>
-            <div class="comment-delete">
-              <%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), method: :delete, class: "btn btn-sm btn-danger" %>
-            </div>
-          <% end %>
-        </td>
-        <% end %>
       </tr>
       </table>
+      
+        <div id="comments-area"><%= render 'post_comments/comment', book: @book, post_comment: @post_comment %></div>
 
-      <div class="new-comment">
-        <%= form_with(model:[@book, @post_comment], local: true) do |f| %>
-          <%= f.text_area :comment, rows:'5', cols:'80', placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
-        <% end %>
-      </div>
     </div>
   </div>
 </div>

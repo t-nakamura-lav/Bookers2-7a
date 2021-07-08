@@ -1,0 +1,4 @@
+$("#comments-area").html("<%= escape_javascript(render partial: 'post_comments/comment', locals: {book: @book, post_comment: @post_comment}) %>");
+  <!--インスタンス変数は、books/showのrender部分に書いた変数と同じにしている。つまり、post_comments_controllerに定義している変数の部分-->
+  
+  

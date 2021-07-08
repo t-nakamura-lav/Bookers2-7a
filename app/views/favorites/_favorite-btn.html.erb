@@ -1,16 +1,14 @@
 <% if user_signed_in? %>
 <p>
     <% if book.favorited_by?(current_user) %>
-        <%= link_to book_favorites_path(book.id, user_id: current_user.id), method: :delete, remote: true do %>
+        <%= link_to book_favorites_path(book.id, user_id: current_user.id), class: "favorite", method: :delete, remote: true do %>
         ♥<%= book.favorites.count %>
         <% end %>
-        
-    
 </p>
     <% else %>
 <p>
-        <%= link_to book_favorites_path(book_id: book.id, user_id: current_user.id), method: :post, remote: true do %>
-        ♡<%= book.favorites.count %>
+        <%= link_to book_favorites_path(book_id: book.id, user_id: current_user.id), class: "not_favorite", method: :post, remote: true do %>
+        ♥<%= book.favorites.count %>
         <% end %>
 </p>
     <% end %>
