@@ -20,6 +20,10 @@ class User < ApplicationRecord
   # 【class_name: "Relationship"】は省略可能
   has_many :followings, through: :relationships, source: :followed
   # 与フォロー関係を通じて参照→follower_idをフォローしている人
+  
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
+  # ユーザ同士で 1 対 1 の DM ができるようにする
 
   validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
   validates :introduction, length: {maximum: 50}
