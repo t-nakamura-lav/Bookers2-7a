@@ -11,7 +11,7 @@
   <body>
     <%= render 'layouts/header' %>
       <main>
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="col-xs-6 col-xs-offset-3 text-center" style="margin: 25px;">
             <% if user_signed_in? %>
               <%= form_with url:search_path, method: :get, local: true do |f| %>

@@ -1,26 +1,35 @@
-<h1>DM</h1>
-
-<h4>参加者</h4>
-<% @entries.each do |e| %>
-  <h5><strong><a href="/users/<%= e.user.id %>"><%= e.user.email%>さん</a></strong></h5>
-<% end %>
-
-<hr>
-<% if @messages.present? %>
-  <% @messages.each do |m| %>
-    <strong><%= m.content %></strong>
-    <small>by <strong><a href="/users/<%= m.user_id %>"><%= m.user.email %>さん</a></strong></small>
+<div class="container">
+  
+    <h1>DM</h1>
+    
+    <h4>参加者</h4>
+    <% @entries.each do |e| %>
+      <h5><strong><a href="/users/<%= e.user.id %>">
+          <%= attachment_image_tag e.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg",class: "icon" %>
+          <%= e.user.email%>さん
+      </a></strong></h5>
+    <% end %>
+    
     <hr>
-  <% end %>
-<% else %>
-  <h3 class="text-center">メッセージはまだありません</h3>
-<% end %>
-
-<%= form_for @message do |f| %>
-  <%= f.text_field :content, :placeholder => "メッセージを入力して下さい" , :size => 70 %>
-  <%= f.hidden_field :room_id, :value => @room.id %>
-  <br>
-  <%= f.submit "投稿する" %>
-<% end %>
-
-<%= link_to "ユーザー一覧に戻る", users_path %>
+    <% if @messages.present? %>
+      <% @messages.each do |m| %>
+        <strong><%= m.content %></strong>
+        <small>by <strong><a href="/users/<%= m.user_id %>">
+          <%= attachment_image_tag m.user, :profile_image, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg",class: "icon" %>
+          <%= m.user.email %>さん</a></strong></small>
+        <hr>
+      <% end %>
+    <% else %>
+      <h3 class="text-center">メッセージはまだありません</h3>
+    <% end %>
+    
+    <%= form_for @message do |f| %>
+      <%= f.text_field :content, :placeholder => "メッセージを入力して下さい" , :size => 70 %>
+      <%= f.hidden_field :room_id, :value => @room.id %>
+      <br>
+      <%= f.submit "投稿する" %>
+    <% end %>
+    
+    <%= link_to "Users一覧に戻る", users_path %>
+  
+</div>
