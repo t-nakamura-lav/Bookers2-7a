@@ -1,7 +1,7 @@
 <% if @book_new.errors.any? %>
   <ul class="error_messages">
     <h3><%= @book_new.errors.count %>errors prohibited this user from being saved:</h3>
-        <% @boo_new.errors.full_messages.each do |message| %>
+        <% @book_new.errors.full_messages.each do |message| %>
         <%= message %>
         <% end %>
   </ul>
