@@ -26,6 +26,7 @@ class BooksController < ApplicationController
   end
 
   def index
+    # いいね数多い順
     to  = Time.current.at_end_of_day
     from  = (to - 6.day).at_beginning_of_day
     @books = Book.includes(:favorited_users).
