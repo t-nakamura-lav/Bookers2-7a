@@ -1,7 +1,11 @@
 class BooksController < ApplicationController
+  # 閲覧数表示
+  impressionist :actions=> [:show]
 
   def show
     @book = Book.find(params[:id])
+    # 閲覧数表示　リロードして稼げないようにする。session_hashはstring型なので.to_sで変換
+    impressionist(@book, nil, unique: [:session_hash.to_s])
     @book_new = Book.new
     @user = @book.user
     @post_comment = PostComment.new
@@ -26,7 +30,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    # いいね数多い順
+    # いいね数多い順に並べる
     to  = Time.current.at_end_of_day
     from  = (to - 6.day).at_beginning_of_day
     @books = Book.includes(:favorited_users).
